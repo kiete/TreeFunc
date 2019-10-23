@@ -32,11 +32,13 @@ arbre ajoute_droit(arbre a);
 void set_value(arbre a, char value);
 
 // Transforme un arbre en chaine de caractere
-int* serialisation(arbre a, char *str);
+void serialisation(arbre a, char *str, int* i);
 
 // Transforme une str en arbre
-arbre deserialisation(char *chaine);
+arbre deserialisation(char *chaine, int *i);
 
 int serialisation_plus(arbre a, char *str);
+
+arbre deserialisation_sup(char *chaine);
 
 #endif

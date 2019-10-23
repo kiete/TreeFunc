@@ -15,7 +15,7 @@ int valeur(arbre a){
 }
 
 arbre creer_arbre(void){
-    return malloc(sizeof(arbre));
+    return malloc(sizeof(noeud));
 }
 
 arbre ajoute_gauche(arbre a){
@@ -33,44 +33,54 @@ void set_value (arbre a , char value){
 }
 
 int serialisation_plus(arbre a , char* str){
-    int *p_i;
-    int val;
-    p_i = serialisation(a,str);
-    val = *p_i;
-    *p_i = 0;
+    
+    int i,val;
+    i = 0;
+    int* p_i = &i;
+    
+    serialisation(a,str,p_i);
+    
+    val = i;
+
     return val;
 }
 
 
-int* serialisation(arbre a, char*str){
-    static int i = 0;
+void serialisation(arbre a, char*str, int*i){
     if (a==NULL){
-        str[i] = '0';
-        i++;
+        str[*i] = '0';
+        (*i)++;
     }else{
-        str[i] = '1';
-        i++;
-        str[i] = valeur(a);
-        i++;
-        serialisation(gauche(a), str);
-        serialisation(droit(a), str);
-        return &i;
+        str[*i] = '1';
+        (*i)++;
+        str[*i] = valeur(a);
+        (*i)++;
+        serialisation(gauche(a), str, i);
+        serialisation(droit(a), str, i);
     }
 }
+arbre deserialisation_sup(char *chaine){
+    
+    int i;
+    arbre a;
 
-arbre deserialisation (char* chaine){
-    static int i = 0;
-    if (chaine[i]=='0'){
-        i++;
+    i=0;
+    return deserialisation(chaine,&i);
+}
+
+
+arbre deserialisation (char* chaine, int*i){
+    if (chaine[*i]=='0'){
+        (*i)++;
         return NULL;
     }
-    if (chaine[i]=='1'){
-        i++;
+    if (chaine[*i]=='1'){
+        (*i)++;
         arbre pointeur = creer_arbre();
-        set_value(pointeur,chaine[i]);
-        i++;
-        pointeur->fils_gauche = (deserialisation(chaine));
-        pointeur->fils_droit = (deserialisation(chaine));
+        set_value(pointeur,chaine[*i]);
+        (*i)++;
+        pointeur->fils_gauche = (deserialisation(chaine,i));
+        pointeur->fils_droit = (deserialisation(chaine,i));
         return pointeur;
     }
 }

@@ -29,10 +29,10 @@ int main(){
     printf("Etape 1 : %s\n", fin);
     fin[j] = 0;
     
-    b = deserialisation(fin);
+    b = deserialisation_sup(fin);
 
     
-    j = serialisation_plus(a, fin);
+    j = serialisation_plus(b, fin);
     printf("Etape 2 : %s\n", fin);
 
     return 0;
