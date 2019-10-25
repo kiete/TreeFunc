@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "arbre.h"
+#define T_MAX 80
 
 arbre gauche (arbre a){
     return a->fils_gauche;
@@ -32,17 +33,21 @@ void set_value (arbre a , char value){
     a->elt = value ;
 }
 
-int serialisation_plus(arbre a , char* str){
-    
-    int i,val;
+char* serialisation_plus(arbre a){
+
+    char *str;
+    int i;
+
+    str = malloc(sizeof(char) * T_MAX);
+
     i = 0;
     int* p_i = &i;
     
     serialisation(a,str,p_i);
-    
-    val = i;
 
-    return val;
+    str[i] = 0;
+
+    return str;
 }
 
 
@@ -55,14 +60,13 @@ void serialisation(arbre a, char*str, int*i){
         (*i)++;
         str[*i] = valeur(a);
         (*i)++;
+
         serialisation(gauche(a), str, i);
         serialisation(droit(a), str, i);
     }
 }
 arbre deserialisation_sup(char *chaine){
-    
     int i;
-    arbre a;
 
     i=0;
     return deserialisation(chaine,&i);
@@ -70,6 +74,7 @@ arbre deserialisation_sup(char *chaine){
 
 
 arbre deserialisation (char* chaine, int*i){
+
     if (chaine[*i]=='0'){
         (*i)++;
         return NULL;
@@ -79,8 +84,10 @@ arbre deserialisation (char* chaine, int*i){
         arbre pointeur = creer_arbre();
         set_value(pointeur,chaine[*i]);
         (*i)++;
+
         pointeur->fils_gauche = (deserialisation(chaine,i));
         pointeur->fils_droit = (deserialisation(chaine,i));
+        
         return pointeur;
     }
 }

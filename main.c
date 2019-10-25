@@ -5,6 +5,7 @@
 
 int main(){
     int j;
+    char *str1, *str2;
     arbre b;
 // On cree l'exemple de la figure 1
     arbre a,p ;
@@ -22,18 +23,14 @@ int main(){
     p = ajoute_gauche(droit(a));
     set_value(p, 'x');
     
-
-    char* fin = malloc(sizeof(char)*T_MAX);
     
-    j = serialisation_plus(a, fin);
-    printf("Etape 1 : %s\n", fin);
-    fin[j] = 0;
+    str1 = serialisation_plus(a);
+    printf("Etape 1 : %s\n", str1);
     
-    b = deserialisation_sup(fin);
-
+    b = deserialisation_sup(str1);
     
-    j = serialisation_plus(b, fin);
-    printf("Etape 2 : %s\n", fin);
+    str2 = serialisation_plus(b);
+    printf("Etape 2 : %s\n", str2);
 
     return 0;
 }

@@ -37,7 +37,7 @@ void serialisation(arbre a, char *str, int* i);
 // Transforme une str en arbre
 arbre deserialisation(char *chaine, int *i);
 
-int serialisation_plus(arbre a, char *str);
+char* serialisation_plus(arbre a);
 
 arbre deserialisation_sup(char *chaine);
 
