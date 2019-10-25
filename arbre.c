@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "arbre.h"
-#define T_MAX 80
+#define T_MAX 100
 
 arbre gauche (arbre a){
     return a->fils_gauche;
